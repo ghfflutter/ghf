@@ -1,5 +1,8 @@
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+library ghf;
+import 'package:intl/intl.dart';
+
+part 'src/ext/number.dart';
+part 'src/ext/string.dart';
+part 'src/net/api.dart';
+part 'src/net/download.dart';
+part 'src/widget/slider.dart';
