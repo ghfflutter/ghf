@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'utils/SharedPreferences.dart';
+import 'utils/store.dart';
 import 'utils/Location.dart';
 
 class GBase {
@@ -17,8 +17,7 @@ class GBase {
       required bool debug}) {
     runZonedGuarded(() async {
       WidgetsFlutterBinding.ensureInitialized();
-      await AppSharedPreferences.init();
-      LangData.loadLangAssets();
+      GStore();
       _apihost = host;
       _aesKey = aeskey;
       _isDebug = debug;
@@ -47,5 +46,43 @@ class GBase {
       tooltip: '开发设置',
       child: const Icon(Icons.developer_board),
     );
+  }
+  // 多语言相关 ----------------------------------------------
+  // 获取多语言配置的 delegate
+  static LocalizationsDelegate getLocalizationsDelegate() {
+    return GLocalizations.delegate; 
+  }
+  // 保持数据相关 ----------------------------------------------
+  //获取字符串
+  String getStore(String key, {String def = ''}) {
+   return GStore().get(key, def: def); 
+  }
+  //获取bool值
+  bool getStoreBool(String key, {bool def = false}) {
+    return GStore().getBool(key, def: def); 
+  }
+  //获取int值
+  int getStoreInt(String key, {int def = 0}) {
+    return GStore().getInt(key, def: def);
+  }
+  //设置字符串
+  setStore(String key, String value) {
+    GStore().set(key, value);
+  }
+  //设置int值
+  setStoreInt(String key, int value) {
+    GStore().setInt(key, value);
+  }
+  //设置bool值
+  setStoreBool(String key, bool value) {
+    GStore().setBool(key, value);
+  }
+  //清空数据
+  clearStore() {
+    GStore().clear();
+  }
+  //删除数据
+  removeStore(String key) {
+    GStore().remove(key);
   }
 }
