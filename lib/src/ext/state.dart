@@ -7,7 +7,7 @@ import '../utils/navigator.dart';
 
 extension StateExt on State {
   //请求接口
-  dynamic api(String apiname,{Map<String, dynamic> params = const {}}) async{
+  Future<dynamic> api(String apiname,{Map<String, dynamic> params = const {}}) async{
     return await Ghf.api(context,apiname,params: params);
   }
   //显示toast
