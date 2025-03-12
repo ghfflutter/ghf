@@ -16,6 +16,12 @@ class Ghf {
   static String _apihost = "";
   static PackageInfo? _packageInfo;
 
+  static String getHost() {
+   return _apihost; 
+  }
+  static setHost(String host){
+    _apihost = host;
+  }
   //运行程序
   static run({required Widget app, required String host, required bool debug}) {
     runZonedGuarded(() async {
