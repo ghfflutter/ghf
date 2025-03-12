@@ -50,7 +50,10 @@ class Ghf {
       child: const Icon(Icons.developer_board),
     );
   }
-
+  //显示toast
+  static toast(String msg){
+    Fluttertoast.showToast(msg: msg);
+  }
   //api请求
   static Future<dynamic> api(BuildContext context, String apiname,
       {Map<String, dynamic> params = const {}}) async {

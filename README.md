@@ -22,4 +22,18 @@ Ghf ghf = Ghf();
 
 ### 路由
 
+### 本地存储
+```dart
+//获取
+Ghf.getStorage("key").then((value) {})
+//设置
+Ghf.setStorage("key", "value")
+Ghf.getStorageBool("key")
+Ghf.getStorageInt("key")
+
+//删除
+Ghf.removeStorage("key")
+Ghf.clearStorage()  //清空所有
+```
+
 
