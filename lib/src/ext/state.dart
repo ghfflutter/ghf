@@ -15,8 +15,12 @@ extension StateExt on State {
     Fluttertoast.showToast(msg: msg);
   }
   //跳转页面
-  push(Widget page) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  Future<T?> push<T extends Object?>(Widget page) {
+    return GNavigatorUtil.push(context, page);
+  }
+  //返回上一页
+  void pop<T extends Object?>(BuildContext context, [ T? result ]){
+    GNavigatorUtil.pop(context,result);
   }
   
 }
