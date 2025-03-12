@@ -1,7 +1,7 @@
 name: ghf
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+homepage: "das"
 
 environment:
   sdk: ^3.6.1
@@ -9,9 +9,8 @@ environment:
 
 dependencies:
   flutter:
-    sdk: flutter
-  intl: ^0.18.1
-  dio: ^5.8.0+1
+    sdk: Flutter
+  # dio: ^5.8.0+1
 
 dev_dependencies:
   flutter_test:
