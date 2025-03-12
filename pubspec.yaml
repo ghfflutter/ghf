@@ -1,7 +1,7 @@
 name: ghf
-description: "A new Flutter package project."
+description: "快速开发flutter应用的框架."
 version: 0.0.1
-homepage: "das"
+homepage: "https://github.com/ghfflutter/ghf"
 
 environment:
   sdk: ^3.6.1

@@ -1,4 +1,4 @@
-part of ghf;
+
 //日志
 class ApiLogs {
   static List<ApiLogInfo> logs = [];
