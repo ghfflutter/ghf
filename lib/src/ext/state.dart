@@ -1,11 +1,12 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:ghf/ghf.dart';
 
 extension StateExt on State {
-  //获取当前页面的上下文
-  dynamic api(String url){
-    Navigator.of(context).pushNamed(url);
+  //请求接口
+  dynamic api(String apiname,{Map<String, dynamic> params = const {}}) async{
+    return await Ghf.api(context,apiname,params: params);
   }
   
 }
