@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -7,9 +5,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 final List<String> _langAssets = [
-  "zh","en","zh_TW","ja","ko","fr","de","es","it","pt","ru","ar","hi","bn","tr","vi","th","id","ms","ph","tl","fil","tlh"
-  "zh_CN",
-  "en_US", 
+  "zh",
+  "en",
+  "zh_TW",
+  "ja",
+  "ko",
+  "fr",
+  "de",
+  "es",
+  "it",
+  "pt",
+  "ru",
+  "ar",
+  "hi",
+  "bn",
+  "tr",
+  "vi",
+  "th",
+  "id",
+  "ms",
+  "ph",
+  "tl",
+  "fil",
+  "tlh"
+      "zh_CN",
+  "en_US",
   "zh_TW",
   "ja_JP",
   "ko_KR",
@@ -36,55 +56,66 @@ final List<String> _langAssets = [
   "tlh_LI",
   "tlh_UM",
   "tlh_ER",
-  "tlh_ET", 
-  "tlh_EE", 
+  "tlh_ET",
+  "tlh_EE",
   "tlh_EO",
   "tlh_KR"
 ];
+
 //多语言数据配置
 class GLocationLangMap {
-    //单例模式  
-    static  GLocationLangMap? _instance;
-    factory GLocationLangMap() {
-      if(_instance == null){
-        _instance = GLocationLangMap._internal();
-        _instance!._langMap = {};
-        _instance!.loadJson();
-      }
-      
-      return _instance!;
+  //单例模式
+  static GLocationLangMap? _instance;
+  factory GLocationLangMap() {
+    if (_instance == null) {
+      _instance = GLocationLangMap._internal();
+      _instance!._langMap = {};
+      _instance!.loadJson();
     }
-    GLocationLangMap._internal();
 
-    Map<String, Map<String, String>> _langMap = {};
-    //加载json数据
-    loadJson(){
-        _langAssets.map((item){
-          rootBundle.loadString("language/${item}").then((value){
-            json.decode(value).forEach((key, value) {
-              if(_langMap.containsKey(item)){
-                _langMap[item]![key] = value;
-              }else{
-                _langMap[item] = {key:value};
-              }
-            });
+    return _instance!;
+  }
+  GLocationLangMap._internal();
+
+  Map<String, Map<String, String>> _langMap = {};
+  //加载json数据
+  loadJson() {
+    _langAssets.map((item) {
+      try {
+        rootBundle.loadString("assets/language/${item}").then((value) {
+          json.decode(value).forEach((key, value) {
+            if (_langMap.containsKey(item)) {
+              _langMap[item]![key] = value;
+            } else {
+              _langMap[item] = {key: value};
+            }
           });
+        }).catchError((e) {
+          print(e);
         });
-    }
-    //获取多语言信息
-    String get(String key,Locale locale) {
-      if(_langMap.containsKey(locale.toLanguageTag())){
-        if(_langMap[locale.toLanguageTag()]!.containsKey(key)){
-          return _langMap[locale.toLanguageTag()]![key]!;
-        }
-      }else if(_langMap.containsKey(locale.languageCode)){
-        if(_langMap[locale.toLanguageTag()]!.containsKey(key)){
-          return _langMap[locale.toLanguageTag()]![key]!;
-        }
+        print("初始化代码");
+        print(_langMap);
+      } catch (e) {
+        print(e);
       }
-      return key;
+    });
+  }
+
+  //获取多语言信息
+  String get(String key, Locale locale) {
+    print(_langMap);
+    if (_langMap.containsKey(locale.toLanguageTag())) {
+      if (_langMap[locale.toLanguageTag()]!.containsKey(key)) {
+        return _langMap[locale.toLanguageTag()]![key]!;
+      }
+    } else if (_langMap.containsKey(locale.languageCode)) {
+      if (_langMap[locale.toLanguageTag()]!.containsKey(key)) {
+        return _langMap[locale.toLanguageTag()]![key]!;
+      }
     }
-} 
+    return key;
+  }
+}
 
 class GLocalizations {
   static LocalizationsDelegate<GLocalizations> delegate = _MyDelegate();
@@ -98,13 +129,19 @@ class GLocalizations {
   }
 
   static GLocalizations of(BuildContext context) {
-    return Localizations.of<GLocalizations>(context, GLocalizations)!;
+    GLocalizations? ret =
+        Localizations.of<GLocalizations>(context, GLocalizations);
+    if (ret == null) {
+      ret = GLocalizations(Locale("zh"));
+    }
+    return ret;
   }
 
   String get(String key) {
-    return GLocationLangMap().get(key, locale); 
+    return GLocationLangMap().get(key, locale);
   }
 }
+
 // continuing from previous example...
 class _MyDelegate extends LocalizationsDelegate<GLocalizations> {
   @override

@@ -93,7 +93,7 @@ class Ghf {
         ));
       }
       Fluttertoast.showToast(
-        msg: "请求失败".location(context),
+        msg: "请求失败".lang(context),
       );
       return null;
     }
