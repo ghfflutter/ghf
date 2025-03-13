@@ -15,7 +15,8 @@ Ghf.run(Widget home,"接口地址",false)
 ### 程序入口
 
 ### 多语言
-
+#### 文件位置
+> assests/language/zh.json
 ### 调试
 
 ### api请求

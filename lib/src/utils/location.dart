@@ -60,7 +60,7 @@ class GLocationLangMap {
     //加载json数据
     loadJson(){
         _langAssets.map((item){
-          rootBundle.loadString(item).then((value){
+          rootBundle.loadString("language/${item}").then((value){
             json.decode(value).forEach((key, value) {
               if(_langMap.containsKey(item)){
                 _langMap[item]![key] = value;
