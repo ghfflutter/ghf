@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:ghf/src/utils/gconfig.dart';
+import 'package:ghf/src/utils/store.dart';
 
 class GAppRootWidget extends StatefulWidget {
   Widget appWidget;
@@ -19,6 +20,9 @@ class GAppRootWidgetState extends State<GAppRootWidget> with WidgetsBindingObser
   @override
   void initState() {
     super.initState();
+    print("isFirst ${GStore().getBool("isFirst",def :false)}");
+    GStore().setBool("isFirst", true);
+    print("isFirst ${GStore().getBool("isFirst",def :false)}");
     widget.config.currentLocale = WidgetsBinding.instance.window.locale;
     // widget.config.currentLocale = View.of(context).platformDispatcher.locale;
     WidgetsBinding.instance.addObserver(this);

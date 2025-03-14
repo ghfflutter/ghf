@@ -3,15 +3,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class GStore {
   //单例  
   static final GStore _instance = GStore._internal();
-  factory GStore() {
-    SharedPreferences.getInstance().then((v){
-      _instance._sp = v;
-    });
-    return _instance;
-  } 
+  factory GStore() => _instance;
+  
   GStore._internal();
   SharedPreferences? _sp;
-
+  static init() async {
+    _instance._sp = await SharedPreferences.getInstance();
+  }
   String get(String key, {String def = ''}) {
     return _sp?.getString(key) ?? def;
   }
