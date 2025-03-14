@@ -1,12 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ghf/ghf.dart';
-import 'package:ghf/src/utils/api.dart';
-import 'package:ghf/src/utils/api_logs.dart';
 import 'package:ghf/src/utils/gconfig.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'utils/store.dart';
@@ -14,7 +9,12 @@ import 'widget/app_root_widget.dart';
 
 //启动应用
 void appRun(Widget app,{GAppConfig? config}) {
-  runApp(GAppRootWidget(app,config??GAppConfig()));
+  WidgetsFlutterBinding.ensureInitialized();
+  config ??= GAppConfig();
+  PackageInfo.fromPlatform().then((value) {
+    config?.packageInfo = value;
+  });
+  runApp(GAppRootWidget(app,config));
 }
 
 
@@ -27,6 +27,7 @@ class Ghf {
    return _apihost; 
   }
   static setHost(String host){
+    
     _apihost = host;
   }
   //运行程序

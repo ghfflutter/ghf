@@ -4,7 +4,7 @@ import 'package:ghf/src/utils/gconfig.dart';
 
 class GAppRootWidget extends StatefulWidget {
   Widget appWidget;
-  GAppConfig config = GAppConfig();
+  GAppConfig config;
   GAppRootWidget(this.appWidget,this.config,{ Key? key }) : super(key: key);
 
   @override

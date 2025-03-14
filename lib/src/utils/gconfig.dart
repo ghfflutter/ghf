@@ -5,7 +5,7 @@ import 'dart:ui';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class GAppConfig {
-  GAppConfig({this.apiHost,this.langMap = const {}});
+  GAppConfig({this.apiHost,this.packageInfo,this.langMap = const {}});
   //当前语言
   Locale? currentLocale;
   //接口地址
