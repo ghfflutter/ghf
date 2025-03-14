@@ -9,7 +9,13 @@ import 'package:ghf/src/utils/api.dart';
 import 'package:ghf/src/utils/api_logs.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'utils/store.dart';
-import 'utils/Location.dart';
+import 'widget/app_root_widget.dart';
+
+//启动应用
+void appRun(Widget app,{GAppConfig? config}) {
+  runApp(GAppRootWidget(app,config??GAppConfig()));
+}
+
 
 class Ghf {
   static bool _isDebug = true;
@@ -56,55 +62,9 @@ class Ghf {
       child: const Icon(Icons.developer_board),
     );
   }
-  //显示toast
-  static toast(String msg){
-    Fluttertoast.showToast(msg: msg);
-  }
-  //api请求
-  static Future<dynamic> api(BuildContext context, String apiname,
-      {Map<String, dynamic> params = const {}}) async {
-    params['app'] = _packageInfo!.packageName;
-    params['version'] = _packageInfo!.version;
-    params['build'] = _packageInfo!.buildNumber;
-    String url = "$_apihost/$apiname";
-    String postData = json.encode(params);
-    HttpClientResponse resp = await GHttp.api(url, data: postData);
+  
 
-    if (resp.statusCode == 200) {
-      String respData = await resp.transform(utf8.decoder).join();
-      if (_isDebug) {
-        ApiLogs.add(ApiLogInfo(
-          url: url,
-          method: 'POST',
-          params: postData,
-          response: respData,
-          time: DateTime.now().toString(),
-        ));
-      }
-      return json.decode(respData);
-    } else {
-      if (_isDebug) {
-        ApiLogs.add(ApiLogInfo(
-          url: url,
-          method: 'POST',
-          params: postData,
-          response: "",
-          time: DateTime.now().toString(),
-        ));
-      }
-      Fluttertoast.showToast(
-        msg: "请求失败".lang(context),
-      );
-      return null;
-    }
-  }
-
-  // 多语言相关 ----------------------------------------------
-  // 获取多语言配置的 delegate
-  static LocalizationsDelegate getLocalizationsDelegate() {
-    return GLocalizations.delegate;
-  }
-
+  
   // 保持数据相关 ----------------------------------------------
   //获取字符串
   String getStore(String key, {String def = ''}) {

@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 
-import '../utils/location.dart';
+import 'package:ghf/src/widget/app_root_widget.dart';
 
 extension StringExt on String {
   
   //显示多语言功能
   String lang(BuildContext context){
-    return GLocalizations.of(context).get(this);
+    GAppConfig config  = GAppRootWidgetState.of(context).config;
+    
+    if(config.langMap.isEmpty){
+      return this;
+    }
+    if(config.langMap.containsKey(config.currentLocale!.toLanguageTag())){
+      if(config.langMap[config.currentLocale!.toLanguageTag()]!.containsKey(this)){
+        return config.langMap[config.currentLocale!.toLanguageTag()]![this]!;
+      }
+      return this;
+    }
+    if(config.langMap.containsKey(config.currentLocale!.languageCode)){
+      if(config.langMap[config.currentLocale!.languageCode]!.containsKey(this)){
+        return config.langMap[config.currentLocale!.languageCode]![this]!;
+      }
+      return this;
+    }
+    return this;
   }
-
+  
   //显示短时间
   String shortTime(BuildContext context){
     DateTime dt = DateTime.parse(this);

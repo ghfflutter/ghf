@@ -1,14 +1,15 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:ghf/ghf.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:ghf/src/utils/api.dart';
 import '../utils/navigator.dart';
+
 
 extension StateExt on State {
   //请求接口
   Future<dynamic> api(String apiname,{Map<String, dynamic> params = const {}}) async{
-    return await Ghf.api(context,apiname,params: params);
+    return await GHttp.api(context,apiname,params: params);
   }
   //显示toast
   toast(String msg){
@@ -22,5 +23,6 @@ extension StateExt on State {
   void pop<T extends Object?>(BuildContext context, [ T? result ]){
     GNavigatorUtil.pop(context,result);
   }
+
   
 }
