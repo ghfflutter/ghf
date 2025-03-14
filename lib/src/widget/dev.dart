@@ -1,5 +1,6 @@
 //调试工具
 import 'package:flutter/material.dart';
+import 'package:ghf/src/widget/app_root_widget.dart';
 import '../ext/state.dart';
 import '../utils/api_logs.dart';
 import '../core.dart';
@@ -12,9 +13,9 @@ class Dev extends StatefulWidget {
 }
 
 class _DevState extends State<Dev> {
-  String host= Ghf.getHost();
   @override
   Widget build(BuildContext context) {
+    String host = GAppRootWidgetState.of(context).config.apiHost!;
     return Scaffold(
       appBar: AppBar(
         title: Text('调试工具'),
@@ -42,7 +43,7 @@ class _DevState extends State<Dev> {
                 TextButton(
                     onPressed: () {
                       setState(() {
-                        Ghf.setHost(host);
+                        GAppRootWidgetState.of(context).config.apiHost = host;
                       });
                     },
                     child: Text("保存"))
