@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ghf/src/ext/string.dart';
+import 'package:ghf/src/utils/gconfig.dart';
 import 'package:ghf/src/widget/app_root_widget.dart';
 
 class GHttp {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ghf/src/utils/gconfig.dart';
 
 import 'package:ghf/src/widget/app_root_widget.dart';
 
@@ -11,9 +12,11 @@ extension StringExt on String {
     if(config.langMap.isEmpty){
       return this;
     }
-    if(config.langMap.containsKey(config.currentLocale!.toLanguageTag())){
-      if(config.langMap[config.currentLocale!.toLanguageTag()]!.containsKey(this)){
-        return config.langMap[config.currentLocale!.toLanguageTag()]![this]!;
+    print("${config.currentLocale!.toLanguageTag()} -- ${config.currentLocale!.languageCode} -- ${config.currentLocale!}");
+    print(config.langMap);
+    if(config.langMap.containsKey(config.currentLocale!.toString())){
+      if(config.langMap[config.currentLocale!.toString()]!.containsKey(this)){
+        return config.langMap[config.currentLocale!.toString()]![this]!;
       }
       return this;
     }

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:ghf/src/utils/gconfig.dart';
 
 class GAppRootWidget extends StatefulWidget {
   Widget appWidget;
@@ -19,7 +19,8 @@ class GAppRootWidgetState extends State<GAppRootWidget> with WidgetsBindingObser
   @override
   void initState() {
     super.initState();
-    widget.config.currentLocale = View.of(context).platformDispatcher.locale;
+    widget.config.currentLocale = WidgetsBinding.instance.window.locale;
+    // widget.config.currentLocale = View.of(context).platformDispatcher.locale;
     WidgetsBinding.instance.addObserver(this);
 
   }
@@ -47,17 +48,4 @@ class GAppRootWidgetState extends State<GAppRootWidget> with WidgetsBindingObser
    return context.findRootAncestorStateOfType<GAppRootWidgetState>()!.widget as GAppRootWidget;
   }
 
-}
-
-//应用配置
-class GAppConfig {
-  GAppConfig({this.apiHost,this.langMap = const {}});
-  //当前语言
-  Locale? currentLocale;
-  //接口地址
-  String? apiHost;
-  //包信息
-  PackageInfo? packageInfo;
-  //多语言配置
-  Map<String, Map<String, String>> langMap = {};
 }

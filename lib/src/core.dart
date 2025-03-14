@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ghf/ghf.dart';
 import 'package:ghf/src/utils/api.dart';
 import 'package:ghf/src/utils/api_logs.dart';
+import 'package:ghf/src/utils/gconfig.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'utils/store.dart';
 import 'widget/app_root_widget.dart';
