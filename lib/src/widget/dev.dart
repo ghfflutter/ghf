@@ -15,13 +15,14 @@ class Dev extends StatefulWidget {
 class _DevState extends State<Dev> {
   @override
   Widget build(BuildContext context) {
-    String host = GAppRootWidgetState.of(context).config.apiHost!;
+    WidgetsApp.debugAllowBannerOverride = false;
+    String host = GAppRootWidget.of(context).config.apiHost!;
     return Scaffold(
       appBar: AppBar(
         title: Text('调试工具'),
       ),
       body: SingleChildScrollView(
-        child: Row(
+        child: Row(   
           children: [
             TextButton(
                 onPressed: () {
@@ -43,7 +44,7 @@ class _DevState extends State<Dev> {
                 TextButton(
                     onPressed: () {
                       setState(() {
-                        GAppRootWidgetState.of(context).config.apiHost = host;
+                        GAppRootWidget.of(context).config.apiHost = host;
                       });
                     },
                     child: Text("保存"))

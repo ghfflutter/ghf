@@ -3,53 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:ghf/src/utils/gconfig.dart';
 import 'package:ghf/src/utils/store.dart';
 
-class GAppRootWidget extends StatefulWidget {
-  Widget appWidget;
+class GAppRootWidget extends InheritedWidget with WidgetsBindingObserver {
   GAppConfig config;
-  GAppRootWidget(this.appWidget,this.config,{ Key? key }) : super(key: key);
+  GAppRootWidget(Widget child,this.config,{ Key? key }) : super(key: key,child: child);
 
+  
   @override
-  GAppRootWidgetState createState() => GAppRootWidgetState();
-}
-
-class GAppRootWidgetState extends State<GAppRootWidget> with WidgetsBindingObserver {
-  @override
-  Widget build(BuildContext context) {
-    return widget.appWidget;
+  bool updateShouldNotify(covariant GAppRootWidget oldWidget) {
+    return oldWidget.config != config;
   }
-  @override
-  void initState() {
-    super.initState();
-    print("isFirst ${GStore().getBool("isFirst",def :false)}");
-    GStore().setBool("isFirst", true);
-    print("isFirst ${GStore().getBool("isFirst",def :false)}");
-    widget.config.currentLocale = WidgetsBinding.instance.window.locale;
-    // widget.config.currentLocale = View.of(context).platformDispatcher.locale;
-    WidgetsBinding.instance.addObserver(this);
-
+  static GAppRootWidget of(BuildContext context) {
+   return context.dependOnInheritedWidgetOfExactType<GAppRootWidget>() as GAppRootWidget;
   }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    
-  }
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-  @override
+   @override
   void didChangeLocales(List<Locale>? locales) {
     super.didChangeLocales(locales);
     if (locales != null && locales.isNotEmpty) {
-      setState(() {
-        widget.config.currentLocale = locales.first;
-      });
+      config.currentLocale = locales.first;
     }
-     
   }
-  static GAppRootWidget of(BuildContext context) {
-   return context.findRootAncestorStateOfType<GAppRootWidgetState>()!.widget as GAppRootWidget;
+  void initState() {
+    print("isFirst ${GStore().getBool("isFirst",def :false)}");
+    GStore().setBool("isFirst", true);
+    print("isFirst ${GStore().getBool("isFirst",def :false)}");
+    config.currentLocale = WidgetsBinding.instance.window.locale;
+    // widget.config.currentLocale = View.of(context).platformDispatcher.locale;
+    WidgetsBinding.instance.addObserver(this);
   }
-
 }
+

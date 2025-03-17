@@ -11,7 +11,7 @@ class GHttp {
   static Future<dynamic> api(BuildContext context, String apiname,
       {Map<String, dynamic> params = const {}}) async {
     try {
-      GAppConfig config = GAppRootWidgetState.of(context).config;
+      GAppConfig config = GAppRootWidget.of(context).config;
       final posturl = Uri.parse(config.apiHost! + apiname);
       final httpClient = HttpClient();
       Map<String, dynamic> param = {};

@@ -7,7 +7,7 @@ extension StringExt on String {
   
   //显示多语言功能
   String lang(BuildContext context){
-    GAppConfig config  = GAppRootWidgetState.of(context).config;
+    GAppConfig config  = GAppRootWidget.of(context).config;
     
     if(config.langMap.isEmpty){
       return this;
