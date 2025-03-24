@@ -42,7 +42,7 @@ class GHttp {
           msg: "请求失败".lang(context),
         );
       }
-    }  on SocketException catch (e)  {
+    }  on SocketException {
       Fluttertoast.showToast(
         msg: "请求失败".lang(context),
       );
